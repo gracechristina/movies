@@ -21,6 +21,10 @@ def movie_detail(request,pk):
     movie = get_object_or_404(Movie, pk=pk)
     return render(request,'cinema/movie_detail.html',{'movie': movie})
 
+def movie_list(request):
+    movies = Movie.objects.filter().order_by("title")
+    return render(request,'cinema/movie_list.html', {'movies' : movies})
+
 def post_list(request):
     posts = Post.objects.filter().order_by('published_date')
     return render(request, 'cinema/post_list.html', {'post': post})
@@ -78,19 +82,7 @@ def post_remove(request,pk):
     return redirect('post_list')
 
 def booking(request):
-    # if this is a POST request we need to process the form data
-    if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        form = PostForm(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
-            return HttpResponseRedirect('/thanks/')
+    movielist = Movie.objects.all().order_by('title')
+    return render(request, 'cinema/booking.html', {'movielist': movielist})
 
-    # if a GET (or any other method) we'll create a blank form
-    else:
-        form = PostForm()
 
-    return render(request, 'cinema/name.html', {'form': form})

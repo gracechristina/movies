@@ -1,0 +1,14 @@
+{% extends 'cinema/base.html' %}
+
+{% block content %}
+{% for movie in movies %}
+    <div class="movie">
+        <div>
+            {{ movie.published_date }}
+        </div>
+        <h1><a href="">{{ movie.title }}</a></h1>
+        <p>{{ movie.category|linebreaksbr }}</p>
+        <p>{{ movie.length|linebreaksbr }}</p>
+    </div>
+{% endfor %}
+{% endblock %}

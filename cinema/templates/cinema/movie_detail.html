@@ -8,6 +8,9 @@
         </div>
     {% endif %}
     <h1>{{ movie.title }}</h1>
-    <p>{{movie.text|linebreaksbr}}</p>
+    <p>{{movie.category|linebreaksbr}}</p>
+    <p>Length: {{movie.length|linebreaksbr}}</p>
+    <a href="{% url 'movie_new' %}" class="btn btn-info" role="button">Done!</a>
+    
 </div>
 {% endblock %}

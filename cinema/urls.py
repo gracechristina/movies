@@ -5,7 +5,8 @@ from . import views
 urlpatterns = [
     url(r'^movie/new/$', views.movie_new, name="movie_new"),
     url(r'^movie/(?P<pk>\d+)/$', views.movie_detail, name="movie_detail"),
-    url(r'^$',views.booking, name="booking"),
+    url(r'^$', views.movie_list, name="movie_list"),
+    url(r'^movie/booking',views.booking, name="booking"),
     url(r'^post/(?P<pk>\d+)/$', views.post_detail, name="post_detail"),
     url(r'^post/new/$', views.post_new, name="post_new"),
     url(r'^post/(?P<pk>\d+)/edit/$', views.post_edit, name="post_edit"),
