@@ -17,6 +17,27 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+class Movie(models.Model):
+    title = models.CharField(max_length=200)
+    category = models.CharField(max_length=100)
+    length = models.IntegerField()
+
+    def publish(self):
+        self.published_date = timezone.now()
+        self.save()
+
+    def __str__(self):
+        return self.title
+        
+class Theatre(models.Model):
+    theatre_name = models.CharField(max_length=100, default="theatre")
+    total_seats = models.IntegerField()
+
+class Showtime(models.Model):
+    show_date = models.DateTimeField(default=timezone.now)
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    theatre = models.ForeignKey(Theatre,on_delete=models.CASCADE)
+
 class Comment(models.Model):
         post = models.ForeignKey("cinema.Post",on_delete=models.CASCADE, related_name="comments")
         author = models.CharField(max_length=200)

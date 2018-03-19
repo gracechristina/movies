@@ -1,0 +1,13 @@
+{% extends 'cinema/base.html' %}
+
+{% block content %}
+<div class="movie">
+    {% if movie.published_date %}
+        <div class="date">
+            {{ movie.published_date }}
+        </div>
+    {% endif %}
+    <h1>{{ movie.title }}</h1>
+    <p>{{movie.text|linebreaksbr}}</p>
+</div>
+{% endblock %}
