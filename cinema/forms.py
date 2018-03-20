@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post, Movie,PostAd, CATEGORIES, LOCATIONS
+from .models import Post, Movie,Theatre
 from django.forms import ModelForm
 
 
@@ -14,4 +14,9 @@ class BookingForm(forms.ModelForm):
 class MovieForm(forms.ModelForm):
     class Meta:
         model = Movie
-        fields = ('title','category','length',)
+        fields = ('title','category','length','photo',)
+
+class TheatreForm(forms.ModelForm):
+    class Meta:
+        model = Theatre
+        fields = ('theatre_name','total_seats',)

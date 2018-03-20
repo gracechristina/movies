@@ -1,14 +1,20 @@
 {% extends 'cinema/base.html' %}
-
+{% load staticfiles %}
 {% block content %}
-{% for movie in movies %}
-    <div class="movie">
-        <div>
-            {{ movie.published_date }}
+    <div class="row">
+        {% for movie in movies %}
+        <div class="col-sm-6 col-md-3">
+            <div class="thumbnail">
+                <img src="{{movie.photo.url}}">
+                <div class="caption">
+                    <h3>{{ movie.title }}</h3>
+                    <p>{{ movie.category|linebreaksbr }}</p>
+                    <p>{{ movie.length|linebreaksbr }} mins</p>
+                </div>
+            </div>
+            
         </div>
-        <h1><a href="">{{ movie.title }}</a></h1>
-        <p>{{ movie.category|linebreaksbr }}</p>
-        <p>{{ movie.length|linebreaksbr }}</p>
+        {% endfor %}
     </div>
-{% endfor %}
+
 {% endblock %}

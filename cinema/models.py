@@ -21,6 +21,7 @@ class Movie(models.Model):
     title = models.CharField(max_length=200)
     category = models.CharField(max_length=100)
     length = models.IntegerField()
+    photo = models.ImageField(upload_to='list/')
 
     def publish(self):
         self.published_date = timezone.now()

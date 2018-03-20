@@ -1,14 +1,14 @@
 from django.shortcuts import render,get_object_or_404
 from django.utils import timezone
-from .models import Post, PostAd, Movie
-from .forms import BookingForm,PostForm, MovieForm
+from .models import Post, PostAd, Movie, Theatre
+from .forms import BookingForm,PostForm, MovieForm, TheatreForm
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import FormView
 
 def movie_new(request):
     if request.method == "POST":
-        form = MovieForm(request.POST)
+        form = MovieForm(request.POST, request.FILES)
         if form.is_valid():
             movie = form.save(commit=False)
             movie.save()
@@ -16,6 +16,17 @@ def movie_new(request):
     else:
         form = MovieForm()
     return render(request, 'cinema/movie_new.html', {'form': form})
+
+def theatre_new(request):
+    if request.method == "POST":
+        form = TheatreForm(request.POST)
+        if form.is_valid():
+            movie = form.save(commit=False)
+            movie.save()
+            return redirect('movie_list')
+    else:
+        form = TheatreForm()
+    return render(request, 'cinema/theatre_new.html', {'form': form})
 
 def movie_detail(request,pk):
     movie = get_object_or_404(Movie, pk=pk)
@@ -83,6 +94,8 @@ def post_remove(request,pk):
 
 def booking(request):
     movielist = Movie.objects.all().order_by('title')
-    return render(request, 'cinema/booking.html', {'movielist': movielist})
+    cinemalist = Theatre.objects.all().order_by('theatre_name')
+    return render(request, 'cinema/booking.html', {'movielist': movielist, 'cinemalist':cinemalist})
 
-
+def admin(request):
+    return render(request, 'cinema/admin.html',{} )
