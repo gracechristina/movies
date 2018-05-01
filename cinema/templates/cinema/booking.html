@@ -1,27 +1,35 @@
 {% extends 'cinema/base.html' %}
+{% load staticfiles %}
 {% block content %}
-<form>
-    <div class="form-group">
+<form method="POST" class="post-form" action={% url 'booking' %}>{% csrf_token %}
+    <div class="form-group" class="post-form">{% csrf_token %}
         <label for="example-text-input" class="col-2 col-form-label">Select a Cinema: </label>
-        <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
+        <select name="dropdowncinema" class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
             <option selected>Choose Cinema</option>
             {% for cinema in cinemalist %}
-                <option value="{{ cinema.pk }}">{{ cinema.theatre_name }}</option>
+                <option value="{{ cinema.theatre_name }}">{{ cinema.theatre_name }}</option>
             {% endfor %}
         </select>
     </div>
-</form>
-<form method = "POST">
     <div class="form-group">
-        <label for="example-text-input" class="col-2 col-form-label">Select a Movie: </label>
-        <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
-            <option selected>Choose Movie</option>
+        <label for="example-text-input"  class="col-2 col-form-label">Select a Movie: </label>
+        <select name="dropdownmovie" class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
+            <option selected = "selected">Choose Movie</option>
             {% for movie in movielist %}
-                <option value="{{ movie.pk }}">{{ movie.title }}</option>
+                <option value="{{ movie.title }}">{{ movie.title }}</option>
             {% endfor %}
         </select>
     </div>
+    <button type="submit" class="btn btn-primary" onClick = "form.submit();">Submit</button>
 </form>
-<button type="submit" class="btn btn-primary">Submit</button>
 
+<p>Here is selection:</p>
+
+<p>{{ cinema_list }}</p>
+<p>{{ movie_list }}</p>
+
+    <script src="http://harvesthq.github.io/chosen/chosen.jquery.js"></script>
+    <script>
+        $('.chosen-select').chosen();
+    </script>
 {% endblock %}

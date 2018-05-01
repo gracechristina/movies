@@ -11,6 +11,7 @@
     <p>{{movie.category|linebreaksbr}}</p>
     <p>Length: {{movie.length|linebreaksbr}}</p>
     <a href="{% url 'movie_new' %}" class="btn btn-info" role="button">Done!</a>
+    <a class="btn btn-default" href="{% url 'movie_edit' pk=movie.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
     
 </div>
 {% endblock %}

@@ -34,6 +34,19 @@ class Theatre(models.Model):
     theatre_name = models.CharField(max_length=100, default="theatre")
     total_seats = models.IntegerField()
 
+    def __str__(self):
+        return self.theatre_name
+
+class Booking(models.Model):  
+    movie_title = models.CharField(max_length=200)
+    theatre_name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.movie_title
+
+    def theatre_name(self):
+        return self.theatre_name
+
 class Showtime(models.Model):
     show_date = models.DateTimeField(default=timezone.now)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
